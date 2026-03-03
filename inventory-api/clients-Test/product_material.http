@@ -1,0 +1,28 @@
+# Prerequisite: Create a product and raw material first, then use their IDs below
+@baseUrl = http://localhost:8080/api/products
+@productId = REPLACE_WITH_PRODUCT_ID
+@rawMaterialId = REPLACE_WITH_RAW_MATERIAL_ID
+
+### List all materials for a product
+GET {{baseUrl}}/{{productId}}/materials
+
+### Add material to product
+POST {{baseUrl}}/{{productId}}/materials
+Content-Type: application/json
+
+{
+  "rawMaterialId": "{{rawMaterialId}}",
+  "requiredQuantity": 2
+}
+
+### Update material quantity (replace rawMaterialId in path with the one to update)
+PUT {{baseUrl}}/{{productId}}/materials/{{rawMaterialId}}
+Content-Type: application/json
+
+{
+  "rawMaterialId": "{{rawMaterialId}}",
+  "requiredQuantity": 5
+}
+
+### Remove material from product
+DELETE {{baseUrl}}/{{productId}}/materials/{{rawMaterialId}}

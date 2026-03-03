@@ -1,0 +1,28 @@
+@baseUrl = http://localhost:8080/api/products
+
+### List all products
+GET {{baseUrl}}
+
+### Get product by ID (replace with actual UUID from create response)
+GET {{baseUrl}}/REPLACE_WITH_PRODUCT_ID
+
+### Create product
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Produto A",
+  "price": 99.90
+}
+
+### Update product (replace with actual UUID)
+PUT {{baseUrl}}/REPLACE_WITH_PRODUCT_ID
+Content-Type: application/json
+
+{
+  "name": "Produto A Updated",
+  "price": 129.90
+}
+
+### Delete product (replace with actual UUID)
+DELETE {{baseUrl}}/REPLACE_WITH_PRODUCT_ID

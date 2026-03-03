@@ -1,0 +1,52 @@
+# Inventory API + Frontend + Oracle Database
+# Run: docker compose up -d
+# Frontend: http://localhost:3000
+# API: http://localhost:8080
+# Oracle: localhost:1521 (XEPDB1, user: system, password: oracle)
+
+services:
+  oracle:
+    image: gvenzl/oracle-xe:21-slim-faststart
+    container_name: inventory-oracle
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PASSWORD: oracle
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 10s
+      retries: 30
+      start_period: 120s
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: inventory-api
+    ports:
+      - "8080:8080"
+    environment:
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:oracle:thin:@//oracle:1521/XEPDB1
+      QUARKUS_DATASOURCE_USERNAME: system
+      QUARKUS_DATASOURCE_PASSWORD: oracle
+    depends_on:
+      oracle:
+        condition: service_healthy
+    restart: on-failure
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: inventory-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: on-failure
+
+volumes:
+  oracle-data:

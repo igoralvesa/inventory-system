@@ -1,0 +1,28 @@
+@baseUrl = http://localhost:8080/api/raw-materials
+
+### List all raw materials
+GET {{baseUrl}}
+
+### Get raw material by ID (replace with actual UUID from create response)
+GET {{baseUrl}}/REPLACE_WITH_RAW_MATERIAL_ID
+
+### Create raw material
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "name": "Material X",
+  "stockQuantity": 100
+}
+
+### Update raw material (replace with actual UUID)
+PUT {{baseUrl}}/16C04BE6-4E23-4E0E-9854-E3BB025F6CF1
+Content-Type: application/json
+
+{
+  "name": "Material X Updated",
+  "stockQuantity": 150
+}
+
+### Delete raw material (replace with actual UUID)
+DELETE {{baseUrl}}/M001
