@@ -292,20 +292,14 @@ export function ProductsPage() {
               <TableCell>{product.name}</TableCell>
               <TableCell>${product.price.toFixed(2)}</TableCell>
               <TableCell className="text-right">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => handleEdit(product)}
-                >
-                  <Pencil className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => handleDeleteClick(product)}
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
+                <div className="flex gap-2 justify-end">
+                  <Button variant="blue" size="sm" onClick={() => handleEdit(product)}>
+                    <Pencil className="h-4 w-4" />
+                  </Button>
+                  <Button variant="destructive" size="sm" onClick={() => handleDeleteClick(product)}>
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
               </TableCell>
             </TableRow>
           ))}
@@ -338,7 +332,7 @@ export function ProductsPage() {
                   id="price"
                   type="number"
                   min="0"
-                  step="0.01"
+                  step="0.1"
                   value={formData.price}
                   onChange={(e) =>
                     setFormData({ ...formData, price: parseFloat(e.target.value) || 0 })
@@ -385,10 +379,10 @@ export function ProductsPage() {
                   id="edit-price"
                   type="number"
                   min="0"
-                  step="0.01"
+                  step="1"
                   value={formData.price}
                   onChange={(e) =>
-                    setFormData({ ...formData, price: parseFloat(e.target.value) || 0 })
+                    setFormData({ ...formData, price: Number(e.target.value) || 0 })
                   }
                   required
                 />
@@ -436,13 +430,13 @@ export function ProductsPage() {
                   <Input
                     id="required-quantity"
                     type="number"
-                    min="0.01"
-                    step="0.01"
+                    min="1"
+                    step="1"
                     value={materialFormData.requiredQuantity}
                     onChange={(e) =>
                       setMaterialFormData({
                         ...materialFormData,
-                        requiredQuantity: parseFloat(e.target.value) || 0,
+                        requiredQuantity: Number(e.target.value) || 0,
                       })
                     }
                     required
@@ -476,13 +470,13 @@ export function ProductsPage() {
                       {editingMaterialId === material.rawMaterialId ? (
                         <Input
                           type="number"
-                          min="0.01"
-                          step="0.01"
+                          min="1"
+                          step="1"
                           value={materialFormData.requiredQuantity}
                           onChange={(e) =>
                             setMaterialFormData({
                               ...materialFormData,
-                              requiredQuantity: parseFloat(e.target.value) || 0,
+                              requiredQuantity: Number(e.target.value) || 0,
                             })
                           }
                           className="w-32"

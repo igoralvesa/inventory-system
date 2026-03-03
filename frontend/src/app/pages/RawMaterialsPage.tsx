@@ -156,20 +156,14 @@ export function RawMaterialsPage() {
               <TableCell>{material.name}</TableCell>
               <TableCell>{material.stockQuantity}</TableCell>
               <TableCell className="text-right">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => handleEdit(material)}
-                >
-                  <Pencil className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => handleDeleteClick(material)}
-                >
-                  <Trash2 className="h-4 w-4" />
-                </Button>
+                <div className="flex gap-2 justify-end">
+                  <Button variant="blue" size="sm" onClick={() => handleEdit(material)}>
+                    <Pencil className="h-4 w-4" />
+                  </Button>
+                  <Button variant="destructive" size="sm" onClick={() => handleDeleteClick(material)}>
+                    <Trash2 className="h-4 w-4" />
+                  </Button>
+                </div>
               </TableCell>
             </TableRow>
           ))}
@@ -202,10 +196,10 @@ export function RawMaterialsPage() {
                   id="stockQuantity"
                   type="number"
                   min="0"
-                  step="0.01"
+                  step="1"
                   value={formData.stockQuantity}
                   onChange={(e) =>
-                    setFormData({ ...formData, stockQuantity: parseFloat(e.target.value) || 0 })
+                    setFormData({ ...formData, stockQuantity: Number(e.target.value) || 0 })
                   }
                   required
                 />
@@ -249,10 +243,10 @@ export function RawMaterialsPage() {
                   id="edit-stockQuantity"
                   type="number"
                   min="0"
-                  step="0.01"
+                  step="1"
                   value={formData.stockQuantity}
                   onChange={(e) =>
-                    setFormData({ ...formData, stockQuantity: parseFloat(e.target.value) || 0 })
+                    setFormData({ ...formData, stockQuantity: Number(e.target.value) || 0 })
                   }
                   required
                 />
